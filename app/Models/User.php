@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -45,5 +46,30 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * @return bool
+     */
+    public function canImpersonate()
+    {
+        // For example
+        return $this->isAdmin();
+        // return $this->hasRole('admin');
+    }
+
+     /**
+     * @return bool
+     */
+    public function canBeImpersonated()
+    {
+        // For example
+        return !$this->isAdmin();
+        // return ! $this->hasRole('admin');
     }
 }

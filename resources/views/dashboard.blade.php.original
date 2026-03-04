@@ -11,8 +11,7 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
 
-
-@canImpersonate($guard = null)
+@canImpersonate
     <a href="{{ route('impersonate', 1) }}">Impersonate user Test 1</a>
 @endCanImpersonate
 
