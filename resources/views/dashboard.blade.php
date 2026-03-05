@@ -11,10 +11,10 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
-            
-               {{-- Admin Only Section --}}
+
+                {{-- Admin Only Section --}}
                 @if(auth()->user()->isAdmin())
-                    <div class="p-6">
+                <div class="p-6">
                     <h3 class="text-lg font-bold mb-4">All Registered Users</h3>
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
@@ -27,22 +27,25 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($users as $user)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $user->role }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @canBeImpersonated($user, $guard = null)
-                                        <a href="{{ route('impersonate', $user->id) }}">Impersonate?
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->role }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @canBeImpersonated($user, $guard = null)
+                                    <a href="{{ route('impersonate', $user->id) }}">Impersonate?
                                         @endCanBeImpersonated
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
-                @else
+                    @else
                     <p>Welcome back, {{ auth()->user()->name }}!</p>
-                @endif
+                    @impersonating
+                    <p><a href="{{ route('impersonate.leave') }}">Stop Impersonating</a></p>
+                    @endImpersonating
+                    @endif
                 </div>
 
             </div>
