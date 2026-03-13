@@ -12,10 +12,10 @@ else
     sudo usermod -aG docker $USER
 fi
 
-#echo "--- Updating package list and installing system dependencies ---"
-#sudo apt update -y
-#sudo apt install -y software-properties-common unzip curl git
-#sleep 5
+echo "--- Updating package list and installing system dependencies ---"
+sudo apt update -y
+sudo apt install -y software-properties-common unzip curl git
+sleep 5
 
 echo "--- Installing Laravel framework ---"
 git clone https://github.com/dregore/Laravel-Impersonate.git && cd Laravel-Impersonate
